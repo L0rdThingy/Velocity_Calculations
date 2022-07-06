@@ -78,7 +78,7 @@ void Fly::flywheel_task() {
             
             rpm_compute( (fly_sensor() - prev_fly_pos), (time - prev_time), TICKS_PER_REV);
             ema_filter(rpm, prev_rpm);
-           compute_pidf(flyVel);
+            compute_pidf(flyVel);
             move_fly(final_power);
 
             print_vel();
