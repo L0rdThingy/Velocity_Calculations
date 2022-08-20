@@ -99,28 +99,14 @@ void Fly::print_vel() { //prints the raw and filtered velocity of the flywheel
     pros::lcd::print(4, "rawRPM:%.0f RPM:%.0f", get_rawVel(), get_vel());
 }
 
-void Fly::indexer_control() {
-    if(master.get_digital(pros::E_CONTROLLER_DIGITAL_B) && lock == false) {
-        out = !out;
-        lock = true;
-    }
-    else if (!master.get_digital(pros::E_CONTROLLER_DIGITAL_B)) {
-        lock = false;
-    }
-        if (out)    indexer.set_value(true);
-        else    indexer.set_value(false);
-}
-
 
 void Fly::flywheel_task() {
     set_constants(1, 0, 0);
     while(true) {
 
-        //move_fly(compute_pidf(get_vel()));
-
+        move_fly(compute_pidf(get_vel()));
         //util::print_with_delay( ([this] {this->print_vel();}), 1000);
         print_vel();
-
 
         pros::delay(util::DELAY_TIME);
     }
