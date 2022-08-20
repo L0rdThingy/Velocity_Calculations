@@ -8,7 +8,6 @@
 #include "pros/rtos.hpp"
 #include "util.hpp"
 
-pros::ADIDigitalOut indexer {'H'};
 
 // Flywheel Constructor
 Fly::Fly(std::vector<int> flywheel_motor_ports, double ticks_per_rev, double flywheel_ratio)
@@ -105,7 +104,6 @@ void Fly::flywheel_task() {
     while(true) {
 
         move_fly(compute_pidf(get_vel()));
-        //util::print_with_delay( ([this] {this->print_vel();}), 1000);
         print_vel();
 
         pros::delay(util::DELAY_TIME);
